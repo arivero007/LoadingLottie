@@ -2,13 +2,19 @@ import SwiftUI
 import Lottie
 
 public struct LoadingLottie: UIViewRepresentable {
-    var name: String = "loading"
-    var loopMode: LottieLoopMode = .loop
-    var text: String? = nil
+    var name: String
+    var loopMode: LottieLoopMode
+    var text: String?
     
     var animationView = AnimationView()
     
-    public init(){}
+    public init(with name: String = "loading",
+                loopMode: LottieLoopMode = .loop,
+                text: String? = nil){
+        self.name = name
+        self.loopMode = loopMode
+        self.text = text
+    }
     
     public func makeUIView(context: UIViewRepresentableContext<LoadingLottie>) -> UIView {
         let view = UIView(frame: .zero)
