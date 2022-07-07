@@ -3,23 +3,38 @@ import Lottie
 
 public struct LoadingLottie: UIViewRepresentable {
     var name: String
-    var loopMode: LottieLoopMode
     var text: String?
+    var bundle: Bundle
+    
+    public var loopMode: LottieLoopMode = .loop
+    public var backgroundColor = UIColor(white: 0.37, alpha: 0.25)
     
     var animationView = AnimationView()
     
-    public init(with name: String = "loading",
-                loopMode: LottieLoopMode = .loop,
+    public init(name: String,
+                bundle: Bundle,
                 text: String? = nil){
         self.name = name
-        self.loopMode = loopMode
+        self.bundle = bundle
+        self.text = text
+    }
+    
+    public init(name: String, bundle: Bundle){
+        self.name = name
+        self.bundle = bundle
+        self.text = nil
+    }
+    
+    public init(text: String = "Loading..."){
+        self.name = "loading"
+        self.bundle = Bundle.module
         self.text = text
     }
     
     public func makeUIView(context: UIViewRepresentableContext<LoadingLottie>) -> UIView {
         let view = UIView(frame: .zero)
         
-        animationView.animation = Animation.named(name)
+        animationView.animation = Animation.named(name, bundle: bundle)
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = loopMode
         animationView.play()
@@ -34,7 +49,7 @@ public struct LoadingLottie: UIViewRepresentable {
         subview.isLayoutMarginsRelativeArrangement = true
         subview.layoutMargins = UIEdgeInsets(top: text == nil ? 0:10, left: 0, bottom: 10, right: 0)
         subview.addArrangedSubview(animationView)
-        view.backgroundColor = UIColor(named: "Background")
+        view.backgroundColor = backgroundColor
         view.addSubview(subview)
 
         if text == nil {
