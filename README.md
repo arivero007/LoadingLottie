@@ -1,3 +1,3 @@
 # LoadingLottie
 
-A description of this package.
+A loading view with custom lottie and text
