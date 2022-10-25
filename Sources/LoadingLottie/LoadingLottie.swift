@@ -9,7 +9,7 @@ public struct LoadingLottie: UIViewRepresentable {
     public var loopMode: LottieLoopMode = .loop
     public var backgroundColor = UIColor(white: 0.37, alpha: 0.25)
     
-    var animationView = AnimationView()
+    var animationView = LottieAnimationView()
     
     public init(name: String,
                 bundle: Bundle,
@@ -25,7 +25,7 @@ public struct LoadingLottie: UIViewRepresentable {
         self.text = nil
     }
     
-    public init(text: String = "Loading..."){
+    public init(text: String? = "Loading..."){
         self.name = "loading"
         self.bundle = Bundle.module
         self.text = text
@@ -50,9 +50,9 @@ public struct LoadingLottie: UIViewRepresentable {
         subview.layoutMargins = UIEdgeInsets(top: text == nil ? 0:10, left: 0, bottom: 10, right: 0)
         subview.addArrangedSubview(animationView)
         view.backgroundColor = backgroundColor
-        view.addSubview(subview)
 
         if text == nil {
+            view.addSubview(subview)
             NSLayoutConstraint.activate([
                 subview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 subview.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -67,18 +67,18 @@ public struct LoadingLottie: UIViewRepresentable {
             labelView.textAlignment = .center
             labelView.numberOfLines = 0
             labelView.lineBreakMode = .byWordWrapping
-            labelView.preferredMaxLayoutWidth = 300
+            labelView.preferredMaxLayoutWidth = 230
             labelView.sizeToFit()
             subview.addArrangedSubview(labelView)
+            view.addSubview(subview)
             NSLayoutConstraint.activate([
                 subview.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 subview.centerYAnchor.constraint(equalTo: view.centerYAnchor),
                 subview.widthAnchor.constraint(equalToConstant: 250),
-                animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                animationView.centerXAnchor.constraint(equalTo: subview.centerXAnchor),
                 animationView.heightAnchor.constraint(equalToConstant: 100),
-                labelView.leftAnchor.constraint(equalTo: subview.leftAnchor, constant: 10),
-                labelView.rightAnchor.constraint(equalTo: subview.rightAnchor, constant: 10),
-                labelView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+                labelView.widthAnchor.constraint(lessThanOrEqualToConstant: 250),
+                labelView.centerXAnchor.constraint(equalTo: subview.centerXAnchor)
             ])
         }
         

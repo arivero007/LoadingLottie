@@ -11,7 +11,7 @@ import Lottie
 public class UILoadingLottie: UIView {
     
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var animationView: AnimationView!
+    @IBOutlet weak var animationView: LottieAnimationView!
     @IBOutlet weak var text: UILabel!
     
     public var name: String = "loading"
@@ -41,7 +41,6 @@ public class UILoadingLottie: UIView {
         self.backgroundColor = backgroundLayer
         configureAnimation()
         configureLabel()
-        
     }
     
     private func configureAnimation(){
