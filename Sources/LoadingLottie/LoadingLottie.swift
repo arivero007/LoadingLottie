@@ -78,7 +78,6 @@ public struct LoadingLottie: UIViewRepresentable {
                 animationView.heightAnchor.constraint(equalToConstant: 100),
                 labelView.leftAnchor.constraint(equalTo: subview.leftAnchor, constant: 10),
                 labelView.rightAnchor.constraint(equalTo: subview.rightAnchor, constant: 10),
-                labelView.bottomAnchor.constraint(equalTo: subview.bottomAnchor, constant: 10),
                 labelView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
         }
